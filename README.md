@@ -126,41 +126,38 @@ The system includes a comprehensive data generator that creates:
 
 Perfect for testing and demonstration purposes!
 
-## � Data Sources
+## 🔗 Data Sources
 
-The application supports multiple data sources that can be switched via environment variable:
+The application supports two data sources that can be switched via environment variable:
 
-### 1. **Mock Data** (Default)
+### 1. **Mock Data** (Default - Current)
 - Generates realistic dummy data using Faker.js
-- Perfect for development and testing
-- No external dependencies
+- Perfect for development, testing, and demonstrations
+- No external dependencies or API setup required
+- Includes:
+  - 50 Projects with realistic timelines and budgets
+  - 20 Clients with contact information
+  - 300 Finance Records with transactions
+  - 100 Employees with roles and departments
+  - 500 Inventory Items with stock levels
 
-### 2. **ERPNext Integration** (Recommended for Demo)
-- Connect to ERPNext REST APIs
-- Use demo instance or your own ERPNext
-- Real ERP data for realistic demonstrations
-- **Setup Guide**: [ERPNEXT_SETUP.md](./docs/ERPNEXT_SETUP.md)
-
-### 3. **CivitBUILD API** (Production)
+### 2. **CivitBUILD API** (Production - Coming Soon)
 - Direct integration with CivitBUILD platform
-- Real-time construction data
-- Coming soon
+- Real-time construction project data
+- Live synchronization with CivitBUILD ERP
+- **Setup Guide**: [CIVITBUILD_API_INTEGRATION.md](./docs/CIVITBUILD_API_INTEGRATION.md)
 
 ### Switching Data Sources
 
 ```bash
-# Use Mock Data
+# Use Mock Data (Current)
 DATA_SOURCE=mock
 
-# Use ERPNext
-DATA_SOURCE=erpnext
-ERPNEXT_API_URL=https://demo.erpnext.com
-ERPNEXT_API_KEY=your_api_key
-ERPNEXT_API_SECRET=your_api_secret
-
-# Use CivitBUILD (Future)
+# Use CivitBUILD API (Future)
 DATA_SOURCE=civitbuild
 CIVIT_API_URL=https://api.civitbuild.com/v1
+CIVIT_API_KEY=your_api_key
+CIVIT_API_SECRET=your_api_secret
 ```
 
 ## �🔧 Configuration

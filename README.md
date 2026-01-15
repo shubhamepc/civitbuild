@@ -74,8 +74,8 @@ CivitBuild/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/civitbuild-erp.git
-cd civitbuild-erp
+git clone https://github.com/shubhamepc/civitbuild.git
+cd civitbuild
 ```
 
 ### 2. Setup Backend
@@ -111,7 +111,7 @@ This application is ready for deployment on modern cloud platforms.
 
 ### Quick Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/civitbuild-erp)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/shubhamepc/civitbuild)
 
 **Detailed deployment instructions:** See [DEPLOYMENT.md](./DEPLOYMENT.md)
 

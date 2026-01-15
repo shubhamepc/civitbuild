@@ -1,0 +1,203 @@
+{
+    "version": "1.0.0",
+    "source": "ERPNext",
+    "description": "Field mapping configuration for ERPNext to Internal Schema",
+    "resources": {
+        "Project": {
+            "endpoint": "/api/resource/Project",
+            "fields": {
+                "name": "externalId",
+                "project_name": "name",
+                "status": "status",
+                "expected_start_date": "startDate",
+                "expected_end_date": "endDate",
+                "actual_start_date": "startDate",
+                "actual_end_date": "endDate",
+                "estimated_costing": "budget",
+                "percent_complete": "progress",
+                "customer": "metadata.customer",
+                "company": "metadata.company",
+                "priority": "metadata.priority",
+                "project_type": "metadata.project_type"
+            },
+            "transformations": {
+                "status": {
+                    "Open": "In Progress",
+                    "Completed": "Completed",
+                    "Cancelled": "On Hold",
+                    "Template": "Planning"
+                },
+                "percent_complete": "parseFloat",
+                "estimated_costing": "parseFloat"
+            }
+        },
+        "Customer": {
+            "endpoint": "/api/resource/Customer",
+            "fields": {
+                "name": "externalId",
+                "customer_name": "name",
+                "email_id": "email",
+                "mobile_no": "phone",
+                "primary_address": "address",
+                "customer_type": "metadata.customer_type",
+                "customer_group": "metadata.customer_group",
+                "territory": "metadata.territory",
+                "website": "metadata.website"
+            }
+        },
+        "Sales Invoice": {
+            "endpoint": "/api/resource/Sales Invoice",
+            "fields": {
+                "name": "externalId",
+                "customer": "metadata.customer",
+                "posting_date": "date",
+                "due_date": "metadata.due_date",
+                "grand_total": "amount",
+                "outstanding_amount": "metadata.outstanding_amount",
+                "status": "metadata.status",
+                "project": "metadata.project",
+                "company": "metadata.company",
+                "currency": "metadata.currency"
+            },
+            "defaults": {
+                "type": "Income",
+                "category": "Sales"
+            },
+            "transformations": {
+                "grand_total": "parseFloat",
+                "outstanding_amount": "parseFloat"
+            }
+        },
+        "Payment Entry": {
+            "endpoint": "/api/resource/Payment Entry",
+            "fields": {
+                "name": "externalId",
+                "posting_date": "date",
+                "payment_type": "metadata.payment_type",
+                "party_type": "metadata.party_type",
+                "party": "metadata.party",
+                "paid_amount": "amount",
+                "received_amount": "amount",
+                "mode_of_payment": "metadata.mode_of_payment",
+                "project": "metadata.project",
+                "reference_no": "metadata.reference_no",
+                "reference_date": "metadata.reference_date"
+            },
+            "defaults": {
+                "category": "Payment"
+            },
+            "transformations": {
+                "paid_amount": "parseFloat",
+                "received_amount": "parseFloat"
+            },
+            "conditionalType": {
+                "field": "payment_type",
+                "mapping": {
+                    "Receive": "Income",
+                    "Pay": "Expense"
+                }
+            }
+        },
+        "Employee": {
+            "endpoint": "/api/resource/Employee",
+            "fields": {
+                "name": "externalId",
+                "employee_name": "name",
+                "personal_email": "email",
+                "cell_number": "phone",
+                "designation": "role",
+                "department": "department",
+                "status": "status",
+                "date_of_joining": "metadata.date_of_joining",
+                "date_of_birth": "metadata.date_of_birth",
+                "gender": "metadata.gender",
+                "company": "metadata.company",
+                "current_address": "metadata.address"
+            },
+            "transformations": {
+                "status": {
+                    "Active": "Active",
+                    "Left": "Inactive",
+                    "Suspended": "Inactive"
+                }
+            }
+        },
+        "Item": {
+            "endpoint": "/api/resource/Item",
+            "fields": {
+                "name": "externalId",
+                "item_name": "name",
+                "item_code": "code",
+                "item_group": "category",
+                "opening_stock": "quantity",
+                "stock_uom": "unit",
+                "valuation_rate": "unitPrice",
+                "standard_rate": "unitPrice",
+                "description": "metadata.description",
+                "is_stock_item": "metadata.is_stock_item"
+            },
+            "transformations": {
+                "opening_stock": "parseFloat",
+                "valuation_rate": "parseFloat",
+                "standard_rate": "parseFloat"
+            }
+        },
+        "Purchase Order": {
+            "endpoint": "/api/resource/Purchase Order",
+            "fields": {
+                "name": "orderNumber",
+                "supplier": "metadata.supplier",
+                "transaction_date": "orderDate",
+                "schedule_date": "deliveryDate",
+                "grand_total": "totalAmount",
+                "status": "status",
+                "company": "metadata.company",
+                "currency": "metadata.currency",
+                "project": "metadata.project"
+            },
+            "transformations": {
+                "grand_total": "parseFloat",
+                "status": {
+                    "Draft": "Pending",
+                    "Submitted": "Pending",
+                    "Stopped": "Cancelled",
+                    "Cancelled": "Cancelled",
+                    "Closed": "Completed",
+                    "On Hold": "Pending",
+                    "Completed": "Completed"
+                }
+            }
+        },
+        "Supplier": {
+            "endpoint": "/api/resource/Supplier",
+            "fields": {
+                "name": "externalId",
+                "supplier_name": "name",
+                "email_id": "email",
+                "mobile_no": "phone",
+                "tax_id": "taxId",
+                "supplier_type": "metadata.supplier_type",
+                "supplier_group": "metadata.supplier_group",
+                "country": "metadata.country",
+                "website": "metadata.website"
+            }
+        }
+    },
+    "apiConfig": {
+        "baseURL": "https://demo.erpnext.com",
+        "authType": "token",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "rateLimit": {
+            "requestsPerSecond": 5,
+            "requestsPerHour": 1000
+        }
+    },
+    "syncConfig": {
+        "batchSize": 100,
+        "retryAttempts": 3,
+        "retryDelay": 1000,
+        "timeout": 30000
+    }
+}

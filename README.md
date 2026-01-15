@@ -126,7 +126,44 @@ The system includes a comprehensive data generator that creates:
 
 Perfect for testing and demonstration purposes!
 
-## 🔧 Configuration
+## � Data Sources
+
+The application supports multiple data sources that can be switched via environment variable:
+
+### 1. **Mock Data** (Default)
+- Generates realistic dummy data using Faker.js
+- Perfect for development and testing
+- No external dependencies
+
+### 2. **ERPNext Integration** (Recommended for Demo)
+- Connect to ERPNext REST APIs
+- Use demo instance or your own ERPNext
+- Real ERP data for realistic demonstrations
+- **Setup Guide**: [ERPNEXT_SETUP.md](./docs/ERPNEXT_SETUP.md)
+
+### 3. **CivitBUILD API** (Production)
+- Direct integration with CivitBUILD platform
+- Real-time construction data
+- Coming soon
+
+### Switching Data Sources
+
+```bash
+# Use Mock Data
+DATA_SOURCE=mock
+
+# Use ERPNext
+DATA_SOURCE=erpnext
+ERPNEXT_API_URL=https://demo.erpnext.com
+ERPNEXT_API_KEY=your_api_key
+ERPNEXT_API_SECRET=your_api_secret
+
+# Use CivitBUILD (Future)
+DATA_SOURCE=civitbuild
+CIVIT_API_URL=https://api.civitbuild.com/v1
+```
+
+## �🔧 Configuration
 
 ### Environment Variables
 

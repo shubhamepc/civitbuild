@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #2f5195;
+  --color-brand-green: #61b05f;
+  --color-brand-lightblue: #c4d2ee;
+  --color-brand-gray: #7184aa;
+  --color-brand-white: #feffff;
+  --color-gray-50: #f9fafb;
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-brand-blue text-brand-white rounded hover:opacity-90 transition-opacity shadow-md;
+  }
+
+  .card {
+    @apply bg-brand-white p-6 rounded-xl shadow-sm border border-brand-lightblue/30;
+  }
+}

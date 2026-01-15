@@ -1,0 +1,20 @@
+[
+    {
+        "civit_field": "proj_name",
+        "internal_field": "name",
+        "model": "Project",
+        "transform": null
+    },
+    {
+        "civit_field": "est_budget",
+        "internal_field": "budget",
+        "model": "Project",
+        "transform": "parseFloat"
+    },
+    {
+        "civit_field": "invoice_total",
+        "internal_field": "amount",
+        "model": "FinanceRecord",
+        "transform": null
+    }
+]

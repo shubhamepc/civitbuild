@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: Implement actual login logic
-        if (email && password) {
+        setError('');
+
+        if (!email || !password) {
+            setError('Please enter both email and password');
+            return;
+        }
+
+        const success = login(email, password);
+        if (success) {
             navigate('/');
+        } else {
+            setError('Invalid credentials');
         }
     };
 
@@ -36,6 +48,12 @@ const Login = () => {
                         <h2 className="text-3xl font-bold text-brand-blue">Welcome Back</h2>
                         <p className="text-brand-gray mt-2">Sign in to access your dashboard</p>
                     </div>
+
+                    {error && (
+                        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                            <p className="text-red-600 text-sm text-center">{error}</p>
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink, Link, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, FolderKanban, LogOut, DollarSign, Package, Users, Settings, Menu, X } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const DashboardLayout = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -8,6 +9,7 @@ const DashboardLayout = () => {
     const [isDemoMode, setIsDemoMode] = useState(true);
     const [showApiModal, setShowApiModal] = useState(false);
     const navigate = useNavigate();
+    const { logout, user } = useAuth();
 
     const navItems = [
         { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
@@ -18,6 +20,7 @@ const DashboardLayout = () => {
     ];
 
     const handleLogout = () => {
+        logout();
         navigate('/login');
     };
 
@@ -65,11 +68,11 @@ const DashboardLayout = () => {
                         className="flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg hover:bg-brand-lightblue/10 transition-colors"
                     >
                         <div className="w-8 h-8 rounded-full bg-brand-lightblue/40 flex items-center justify-center text-brand-blue font-bold text-xs ring-2 ring-brand-white">
-                            RK
+                            {user?.name?.substring(0, 2).toUpperCase() || 'U'}
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-brand-blue truncate">Rajnish Kumar</p>
-                            <p className="text-xs text-brand-gray truncate">Super Admin</p>
+                            <p className="text-sm font-medium text-brand-blue truncate">{user?.name || 'User'}</p>
+                            <p className="text-xs text-brand-gray truncate">{user?.role || 'Admin'}</p>
                         </div>
                         <Settings size={16} className="text-brand-gray" />
                     </button>
